@@ -1,0 +1,112 @@
+---
+import Logo from './Logo.astro';
+import { NAV, APP } from '../config';
+
+const path = Astro.url.pathname;
+const isActive = (href: string) =>
+  href === '/' ? path === '/' : path.startsWith(href);
+---
+
+<header class="site-header">
+  <div class="container site-header__inner">
+    <Logo />
+
+    <input type="checkbox" id="nav-toggle" class="nav-toggle" hidden />
+    <label for="nav-toggle" class="nav-burger" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </label>
+
+    <nav class="site-nav" aria-label="Primary">
+      <ul>
+        {
+          NAV.map((item) => (
+            <li>
+              <a href={item.href} class={isActive(item.href) ? 'active' : ''}>
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <div class="site-nav__cta">
+        <a href={APP.signin} class="btn btn--ghost">Sign in</a>
+        <a href={APP.signup} class="btn btn--primary">Start free</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: saturate(180%) blur(8px);
+    border-bottom: 1px solid var(--ff-line);
+  }
+  .site-header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+  .site-nav {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+  .site-nav ul {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .site-nav a {
+    color: var(--ff-ink-soft);
+    font-weight: 500;
+    font-size: 0.95rem;
+  }
+  .site-nav a:hover { color: var(--ff-brand-dark); text-decoration: none; }
+  .site-nav a.active { color: var(--ff-brand-dark); }
+  .site-nav__cta { display: flex; gap: 0.75rem; }
+  .site-nav__cta .btn { padding: 0.5rem 1rem; font-size: 0.9rem; }
+
+  .nav-toggle, .nav-burger { display: none; }
+  .nav-burger {
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 0.5rem;
+  }
+  .nav-burger span {
+    width: 22px;
+    height: 2px;
+    background: var(--ff-ink);
+    border-radius: 2px;
+  }
+
+  @media (max-width: 860px) {
+    .nav-burger { display: flex; }
+    .site-nav {
+      position: absolute;
+      top: 64px;
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 1rem;
+      background: #fff;
+      border-bottom: 1px solid var(--ff-line);
+      padding: 1.25rem 1.5rem 1.75rem;
+      display: none;
+      box-shadow: var(--ff-shadow);
+    }
+    .site-nav ul { flex-direction: column; gap: 0.25rem; }
+    .site-nav ul a { display: block; padding: 0.5rem 0; }
+    .site-nav__cta { flex-direction: column; }
+    .site-nav__cta .btn { width: 100%; }
+    .nav-toggle:checked ~ .site-nav { display: flex; }
+  }
+</style>

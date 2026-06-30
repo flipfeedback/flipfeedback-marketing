@@ -1,0 +1,177 @@
+/* FlipFeedback marketing — global styles and design tokens. */
+
+:root {
+  /* Brand palette */
+  --ff-ink: #0f172a;          /* slate-900, primary text */
+  --ff-ink-soft: #334155;     /* slate-700, body text */
+  --ff-muted: #64748b;        /* slate-500, secondary text */
+  --ff-line: #e2e8f0;         /* slate-200, borders */
+  --ff-surface: #ffffff;
+  --ff-surface-alt: #f8fafc;  /* slate-50, alternating sections */
+
+  --ff-brand: #0d9488;        /* teal-600, primary brand */
+  --ff-brand-dark: #0f766e;   /* teal-700, hover */
+  --ff-brand-soft: #ccfbf1;   /* teal-100, tints */
+  --ff-accent: #4f46e5;       /* indigo-600, accents */
+
+  --ff-radius: 12px;
+  --ff-radius-sm: 8px;
+  --ff-shadow: 0 1px 2px rgba(15, 23, 42, 0.04), 0 8px 24px rgba(15, 23, 42, 0.06);
+  --ff-maxw: 1120px;
+
+  --ff-font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial,
+    sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--ff-font);
+  color: var(--ff-ink-soft);
+  background: var(--ff-surface);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4 {
+  color: var(--ff-ink);
+  line-height: 1.2;
+  margin: 0 0 0.5em;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+h1 { font-size: clamp(2.1rem, 5vw, 3.25rem); }
+h2 { font-size: clamp(1.6rem, 3.5vw, 2.25rem); }
+h3 { font-size: 1.25rem; }
+
+p { margin: 0 0 1rem; }
+
+a {
+  color: var(--ff-brand-dark);
+  text-decoration: none;
+}
+a:hover { text-decoration: underline; }
+
+img { max-width: 100%; height: auto; display: block; }
+
+/* Layout helpers */
+.container {
+  width: 100%;
+  max-width: var(--ff-maxw);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.section {
+  padding: 4.5rem 0;
+}
+
+.section--alt {
+  background: var(--ff-surface-alt);
+  border-top: 1px solid var(--ff-line);
+  border-bottom: 1px solid var(--ff-line);
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--ff-brand);
+  margin-bottom: 0.75rem;
+}
+
+.lead {
+  font-size: 1.2rem;
+  color: var(--ff-muted);
+  max-width: 48ch;
+}
+
+.text-center { text-align: center; }
+.mx-auto { margin-left: auto; margin-right: auto; }
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0.7rem 1.4rem;
+  border-radius: var(--ff-radius-sm);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  text-decoration: none;
+}
+.btn:hover { text-decoration: none; }
+
+.btn--primary {
+  background: var(--ff-brand);
+  color: #fff;
+}
+.btn--primary:hover { background: var(--ff-brand-dark); }
+
+.btn--ghost {
+  background: transparent;
+  color: var(--ff-ink);
+  border-color: var(--ff-line);
+}
+.btn--ghost:hover { border-color: var(--ff-muted); }
+
+.btn--light {
+  background: #fff;
+  color: var(--ff-brand-dark);
+}
+.btn--light:hover { background: var(--ff-brand-soft); }
+
+/* Grid */
+.grid {
+  display: grid;
+  gap: 1.5rem;
+}
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+
+/* Cards */
+.card {
+  background: var(--ff-surface);
+  border: 1px solid var(--ff-line);
+  border-radius: var(--ff-radius);
+  padding: 1.75rem;
+  box-shadow: var(--ff-shadow);
+}
+
+.card h3 { margin-bottom: 0.5rem; }
+.card p { color: var(--ff-muted); margin-bottom: 0; }
+
+.icon-badge {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: var(--ff-brand-soft);
+  color: var(--ff-brand-dark);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  font-size: 1.4rem;
+}
+
+@media (max-width: 860px) {
+  .grid-3 { grid-template-columns: 1fr; }
+  .grid-2 { grid-template-columns: 1fr; }
+  .section { padding: 3rem 0; }
+}

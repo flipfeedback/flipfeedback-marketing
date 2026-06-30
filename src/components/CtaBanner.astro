@@ -1,0 +1,48 @@
+---
+import { APP } from '../config';
+interface Props {
+  title?: string;
+  subtitle?: string;
+}
+const {
+  title = 'Start understanding your feedback today',
+  subtitle = 'Free for 14 days. No credit card required.',
+}: Props = Astro.props;
+---
+
+<section class="cta-banner">
+  <div class="container cta-banner__inner">
+    <div>
+      <h2>{title}</h2>
+      <p>{subtitle}</p>
+    </div>
+    <div class="cta-banner__actions">
+      <a href={APP.signup} class="btn btn--light">Start free</a>
+      <a href="/contact" class="btn btn--ghost btn--ghost-inverse">Talk to us</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta-banner {
+    background: linear-gradient(135deg, var(--ff-brand-dark), var(--ff-accent));
+    color: #fff;
+    padding: 3.5rem 0;
+  }
+  .cta-banner__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .cta-banner h2 { color: #fff; margin-bottom: 0.25rem; }
+  .cta-banner p { color: rgba(255, 255, 255, 0.85); margin: 0; }
+  .cta-banner__actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+  .btn--ghost-inverse {
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.4);
+    background: transparent;
+  }
+  .btn--ghost-inverse:hover { border-color: #fff; }
+</style>

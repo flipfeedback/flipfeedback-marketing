@@ -1,0 +1,75 @@
+---
+import Logo from './Logo.astro';
+import { SITE, FOOTER_LINKS } from '../config';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container site-footer__inner">
+    <div class="site-footer__brand">
+      <Logo />
+      <p>{SITE.tagline}</p>
+      <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
+    </div>
+
+    {
+      Object.entries(FOOTER_LINKS).map(([group, links]) => (
+        <div class="site-footer__col">
+          <h4>{group}</h4>
+          <ul>
+            {links.map((l) => (
+              <li><a href={l.href}>{l.label}</a></li>
+            ))}
+          </ul>
+        </div>
+      ))
+    }
+  </div>
+
+  <div class="container site-footer__bottom">
+    <span>&copy; {year} {SITE.name}, Inc. All rights reserved.</span>
+    <span>Made for marketing teams that listen.</span>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--ff-ink);
+    color: #cbd5e1;
+    padding: 3.5rem 0 2rem;
+    margin-top: 2rem;
+  }
+  .site-footer__inner {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 2.5rem;
+  }
+  .site-footer__brand p { color: #94a3b8; margin: 1rem 0 0.5rem; max-width: 30ch; }
+  .site-footer__brand a { color: #5eead4; }
+  .site-footer h4 {
+    color: #fff;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 1rem;
+  }
+  .site-footer ul { list-style: none; margin: 0; padding: 0; }
+  .site-footer li { margin-bottom: 0.6rem; }
+  .site-footer__col a { color: #cbd5e1; font-size: 0.95rem; }
+  .site-footer__col a:hover { color: #fff; }
+  .site-footer__bottom {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #1e293b;
+    font-size: 0.85rem;
+    color: #64748b;
+  }
+  @media (max-width: 860px) {
+    .site-footer__inner { grid-template-columns: 1fr 1fr; }
+    .site-footer__brand { grid-column: 1 / -1; }
+    .site-footer__bottom { flex-direction: column; gap: 0.5rem; }
+  }
+</style>
