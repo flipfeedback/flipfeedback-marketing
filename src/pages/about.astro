@@ -1,0 +1,151 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CtaBanner from '../components/CtaBanner.astro';
+
+const values = [
+  { title: 'Listen first', body: 'We build the tool we wished we had: one that makes hearing your audience the easy part of the job.' },
+  { title: 'Keep it simple', body: 'Feedback tooling does not need to be heavy. We say no to features that add clicks without adding clarity.' },
+  { title: 'Earn trust', body: 'Your feedback data is sensitive. We treat security and privacy as table stakes, not a checkbox.' },
+];
+
+// Founders are presented publicly. The wider team is small and growing.
+const team = [
+  {
+    name: 'Noel Castillo',
+    role: 'Co-founder & CEO',
+    bio: 'Previously led growth at two B2B SaaS companies. Started FlipFeedback after one too many Monday-morning feedback spreadsheets.',
+    initials: 'NC',
+  },
+  {
+    name: 'Marcus Webb',
+    role: 'Co-founder & CTO',
+    bio: 'Spent a decade building data and analytics products. Believes the best insight is the one you did not have to go looking for.',
+    initials: 'MW',
+  },
+];
+---
+
+<BaseLayout
+  title="About"
+  description="FlipFeedback was founded to give marketing teams one place to collect, triage, and understand feedback. Meet the team behind the product."
+>
+  <section class="section hero-lite">
+    <div class="container text-center">
+      <p class="eyebrow">About us</p>
+      <h1>We help teams hear what their audience is telling them</h1>
+      <p class="lead mx-auto" style="text-align:center;">
+        FlipFeedback started with a simple frustration: the people closest to a campaign
+        had no single place to see what their audience actually thought. So we built one.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container story">
+      <div>
+        <h2>Our story</h2>
+        <p>
+          FlipFeedback began in 2024 as a side project between two friends who had each spent
+          years on marketing and data teams. Every quarter they watched the same pattern:
+          feedback scattered across surveys, replies, reviews, and support tickets, then
+          stitched together by hand the night before a planning meeting.
+        </p>
+        <p>
+          They figured the collecting and stitching should be the software's job, leaving
+          people free to do the thinking. That idea became a feedback inbox with analytics
+          built in, and today FlipFeedback helps marketing and growth teams turn a noisy
+          stream of signals into trends they can act on.
+        </p>
+        <p>
+          We are a small, focused team based remotely across North America, and we are
+          building deliberately: shipping steadily, listening to our own customers, and
+          keeping the product simple as it grows.
+        </p>
+      </div>
+      <aside class="stats card">
+        <div><span class="stats__n">2024</span><span class="stats__l">Founded</span></div>
+        <div><span class="stats__n">7</span><span class="stats__l">People on the team</span></div>
+        <div><span class="stats__n">1M+</span><span class="stats__l">Feedback items processed monthly</span></div>
+        <div><span class="stats__n">100%</span><span class="stats__l">Remote</span></div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <h2 class="text-center" style="margin-bottom:2rem;">What we value</h2>
+      <div class="grid grid-3">
+        {
+          values.map((v) => (
+            <div class="card">
+              <h3>{v.title}</h3>
+              <p>{v.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="text-center" style="margin-bottom:2rem;">Founders</h2>
+      <div class="grid grid-2" style="max-width:760px;margin:0 auto;">
+        {
+          team.map((m) => (
+            <div class="card person">
+              <span class="person__avatar">{m.initials}</span>
+              <div>
+                <h3 style="margin-bottom:0.15rem;">{m.name}</h3>
+                <p class="person__role">{m.role}</p>
+                <p>{m.bio}</p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <CtaBanner title="Want to build something with us?" subtitle="We are a small team that ships. Reach out any time." />
+</BaseLayout>
+
+<style>
+  .hero-lite {
+    background: radial-gradient(1000px 400px at 50% -20%, var(--ff-brand-soft), transparent 60%);
+  }
+  .story {
+    display: grid;
+    grid-template-columns: 1.4fr 0.9fr;
+    gap: 3rem;
+    align-items: start;
+  }
+  .story p { color: var(--ff-ink-soft); }
+  .stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+  .stats__n { display: block; font-size: 1.8rem; font-weight: 800; color: var(--ff-brand-dark); letter-spacing: -0.03em; }
+  .stats__l { color: var(--ff-muted); font-size: 0.9rem; }
+
+  .person { display: flex; gap: 1.25rem; align-items: flex-start; }
+  .person__avatar {
+    flex: none;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--ff-brand-soft);
+    color: var(--ff-brand-dark);
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .person__role { color: var(--ff-brand-dark); font-weight: 600; margin-bottom: 0.5rem; }
+  .person p:last-child { color: var(--ff-muted); }
+
+  @media (max-width: 860px) {
+    .story { grid-template-columns: 1fr; }
+  }
+</style>

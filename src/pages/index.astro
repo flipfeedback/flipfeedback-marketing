@@ -1,0 +1,233 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CtaBanner from '../components/CtaBanner.astro';
+import { APP } from '../config';
+
+const features = [
+  {
+    icon: '📥',
+    title: 'One unified inbox',
+    body: 'Pull feedback from campaigns, surveys, support, app reviews, and social into a single stream. No more tab-hopping to find out what people think.',
+  },
+  {
+    icon: '🏷️',
+    title: 'Triage in seconds',
+    body: 'Label, assign, and resolve. Lightweight workflows keep your team moving so nothing important sits unread.',
+  },
+  {
+    icon: '📈',
+    title: 'Analytics that explain',
+    body: 'Volume over time, breakdown by source and campaign, and sentiment trends. See what changed and why, without exporting a thing.',
+  },
+  {
+    icon: '🔌',
+    title: 'Connect your sources',
+    body: 'A handful of clicks to wire up the channels you already run. Feedback flows in automatically and stays in sync.',
+  },
+  {
+    icon: '👥',
+    title: 'Built for teams',
+    body: 'Shared views, assignments, and comments mean marketing, product, and support all work from the same signal.',
+  },
+  {
+    icon: '⚡',
+    title: 'Fast by default',
+    body: 'Search, filter, and slice thousands of items instantly. FlipFeedback stays quick as your volume grows.',
+  },
+];
+
+const steps = [
+  { n: '1', title: 'Connect', body: 'Link the campaigns and channels you run. Feedback starts flowing into your inbox right away.' },
+  { n: '2', title: 'Triage', body: 'Label and assign as a team. Resolve what you can, escalate what matters.' },
+  { n: '3', title: 'Learn', body: 'Watch the analytics turn the stream into trends, and bring them to your next planning meeting.' },
+];
+---
+
+<BaseLayout>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container hero__inner">
+      <div class="hero__copy">
+        <p class="eyebrow">Feedback inbox &amp; analytics</p>
+        <h1>One inbox for every piece of feedback.</h1>
+        <p class="lead">
+          FlipFeedback brings feedback from every campaign and channel into one place, so
+          marketing teams can triage it fast and turn it into trends they can act on.
+        </p>
+        <div class="hero__actions">
+          <a href={APP.signup} class="btn btn--primary">Start free for 14 days</a>
+          <a href="/product" class="btn btn--ghost">See how it works</a>
+        </div>
+        <p class="hero__note">No credit card required. Cancel anytime.</p>
+      </div>
+
+      <div class="hero__visual" aria-hidden="true">
+        <div class="mock">
+          <div class="mock__bar">
+            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            <span class="mock__title">Inbox</span>
+          </div>
+          <div class="mock__row">
+            <span class="tag tag--green">Resolved</span>
+            <span class="mock__text">Loved the new pricing page layout</span>
+          </div>
+          <div class="mock__row mock__row--active">
+            <span class="tag tag--amber">In review</span>
+            <span class="mock__text">Checkout felt slow on mobile</span>
+          </div>
+          <div class="mock__row">
+            <span class="tag tag--blue">New</span>
+            <span class="mock__text">Can we get a dark mode?</span>
+          </div>
+          <div class="mock__chart">
+            <span style="height:40%"></span><span style="height:62%"></span>
+            <span style="height:50%"></span><span style="height:78%"></span>
+            <span style="height:66%"></span><span style="height:90%"></span>
+            <span style="height:72%"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust strip -->
+  <section class="trust">
+    <div class="container">
+      <p>Trusted by marketing and growth teams to make sense of thousands of signals every week.</p>
+      <div class="trust__logos">
+        <span>Northbeam</span><span>Cleary Co.</span><span>Pith Labs</span>
+        <span>Hatchworks</span><span>Tidewater</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="section">
+    <div class="container">
+      <div class="text-center" style="max-width:42ch;margin:0 auto 2.5rem;">
+        <p class="eyebrow">Why FlipFeedback</p>
+        <h2>Everything you need to act on feedback</h2>
+      </div>
+      <div class="grid grid-3">
+        {
+          features.map((f) => (
+            <div class="card">
+              <span class="icon-badge">{f.icon}</span>
+              <h3>{f.title}</h3>
+              <p>{f.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="section section--alt">
+    <div class="container">
+      <div class="text-center" style="max-width:42ch;margin:0 auto 2.5rem;">
+        <p class="eyebrow">How it works</p>
+        <h2>Up and running in an afternoon</h2>
+      </div>
+      <div class="grid grid-3">
+        {
+          steps.map((s) => (
+            <div class="step">
+              <span class="step__n">{s.n}</span>
+              <h3>{s.title}</h3>
+              <p>{s.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Quote -->
+  <section class="section">
+    <div class="container quote">
+      <blockquote>
+        “We used to pull feedback from five tools into a spreadsheet every Monday.
+        FlipFeedback gave us that hour back and showed us a trend we'd been missing for months.”
+      </blockquote>
+      <p class="quote__by">— Priya M., Head of Growth at Cleary Co.</p>
+    </div>
+  </section>
+
+  <CtaBanner />
+</BaseLayout>
+
+<style>
+  .hero {
+    padding: 4.5rem 0 4rem;
+    background: radial-gradient(1200px 500px at 80% -10%, var(--ff-brand-soft), transparent 60%);
+  }
+  .hero__inner {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 3rem;
+    align-items: center;
+  }
+  .hero__actions { display: flex; gap: 0.75rem; margin: 1.75rem 0 0.75rem; flex-wrap: wrap; }
+  .hero__note { font-size: 0.9rem; color: var(--ff-muted); }
+
+  /* Hero mock */
+  .mock {
+    background: #fff;
+    border: 1px solid var(--ff-line);
+    border-radius: var(--ff-radius);
+    box-shadow: var(--ff-shadow);
+    padding: 1rem;
+  }
+  .mock__bar { display: flex; align-items: center; gap: 0.4rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--ff-line); }
+  .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--ff-line); }
+  .mock__title { margin-left: 0.5rem; font-weight: 700; color: var(--ff-ink); }
+  .mock__row {
+    display: flex; align-items: center; gap: 0.75rem;
+    padding: 0.7rem 0.5rem; border-radius: var(--ff-radius-sm);
+  }
+  .mock__row--active { background: var(--ff-surface-alt); }
+  .mock__text { color: var(--ff-ink-soft); font-size: 0.95rem; }
+  .tag {
+    font-size: 0.72rem; font-weight: 700; padding: 0.15rem 0.55rem;
+    border-radius: 999px; white-space: nowrap;
+  }
+  .tag--green { background: #dcfce7; color: #166534; }
+  .tag--amber { background: #fef3c7; color: #92400e; }
+  .tag--blue { background: #dbeafe; color: #1e40af; }
+  .mock__chart {
+    display: flex; align-items: flex-end; gap: 0.4rem; height: 80px;
+    margin-top: 0.75rem; padding: 0.5rem; background: var(--ff-surface-alt);
+    border-radius: var(--ff-radius-sm);
+  }
+  .mock__chart span { flex: 1; background: var(--ff-brand); border-radius: 3px 3px 0 0; opacity: 0.85; }
+
+  /* Trust */
+  .trust { padding: 2.5rem 0; border-bottom: 1px solid var(--ff-line); }
+  .trust p { text-align: center; color: var(--ff-muted); margin-bottom: 1.25rem; }
+  .trust__logos {
+    display: flex; justify-content: center; gap: 2.5rem; flex-wrap: wrap;
+    font-weight: 700; color: #94a3b8; letter-spacing: -0.02em; font-size: 1.05rem;
+  }
+
+  /* Steps */
+  .step__n {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 38px; height: 38px; border-radius: 50%;
+    background: var(--ff-brand); color: #fff; font-weight: 700; margin-bottom: 0.75rem;
+  }
+  .step p { color: var(--ff-muted); }
+
+  /* Quote */
+  .quote { text-align: center; max-width: 60ch; margin: 0 auto; }
+  .quote blockquote {
+    font-size: clamp(1.3rem, 3vw, 1.7rem); color: var(--ff-ink);
+    font-weight: 600; letter-spacing: -0.02em; margin: 0 0 1rem; line-height: 1.4;
+  }
+  .quote__by { color: var(--ff-muted); }
+
+  @media (max-width: 860px) {
+    .hero__inner { grid-template-columns: 1fr; }
+    .hero__visual { order: -1; }
+  }
+</style>

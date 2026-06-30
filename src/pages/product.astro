@@ -1,0 +1,158 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CtaBanner from '../components/CtaBanner.astro';
+import { APP } from '../config';
+
+const sections = [
+  {
+    eyebrow: 'Inbox',
+    title: 'Every signal, one stream',
+    body: 'Feedback arrives from a dozen places: campaign replies, survey responses, app store reviews, support tickets, social mentions. FlipFeedback collects them into a single, searchable inbox so your team works from one source of truth instead of five.',
+    points: [
+      'Filter by source, campaign, status, or sentiment',
+      'Full-text search across every item',
+      'Saved views for the segments you watch most',
+    ],
+  },
+  {
+    eyebrow: 'Triage',
+    title: 'Lightweight workflow, no overhead',
+    body: 'Tag what matters, assign owners, and move items from new to in review to resolved. Triage is fast enough to do daily and structured enough that nothing slips through.',
+    points: [
+      'Custom labels for themes, products, and priorities',
+      'Assign to teammates and leave comments',
+      'Status changes that keep the inbox honest',
+    ],
+  },
+  {
+    eyebrow: 'Analytics',
+    title: 'Trends, not just totals',
+    body: 'The analytics view turns the raw stream into something you can present. Volume over time, breakdowns by source and campaign, and sentiment movement, so you can tell what changed and act before the next sprint.',
+    points: [
+      'Volume and sentiment over any time range',
+      'Breakdown by campaign, source, and label',
+      'Highlight the shifts worth a closer look',
+    ],
+  },
+  {
+    eyebrow: 'Connections',
+    title: 'Wire up the channels you already run',
+    body: 'Connecting a source takes a few clicks, and feedback flows in automatically from then on. Add channels as you grow without re-plumbing anything.',
+    points: [
+      'Campaign and channel connectors',
+      'Import historical feedback on setup',
+      'Team settings and member roles',
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="Product"
+  description="FlipFeedback collects feedback from every campaign and channel into one inbox, gives you fast triage, and turns the stream into analytics you can act on."
+>
+  <section class="section hero-lite">
+    <div class="container text-center">
+      <p class="eyebrow">The product</p>
+      <h1>Collect, triage, and understand feedback</h1>
+      <p class="lead mx-auto" style="text-align:center;">
+        FlipFeedback is built for the way marketing teams actually work: feedback comes from
+        everywhere, and you need to make sense of it without a data team.
+      </p>
+      <div class="hero__actions" style="justify-content:center;margin-top:1.5rem;">
+        <a href={APP.signup} class="btn btn--primary">Start free</a>
+        <a href="/pricing" class="btn btn--ghost">See pricing</a>
+      </div>
+    </div>
+  </section>
+
+  {
+    sections.map((s, i) => (
+      <section class={`section ${i % 2 === 1 ? 'section--alt' : ''}`}>
+        <div class={`container feature ${i % 2 === 1 ? 'feature--reverse' : ''}`}>
+          <div class="feature__copy">
+            <p class="eyebrow">{s.eyebrow}</p>
+            <h2>{s.title}</h2>
+            <p>{s.body}</p>
+            <ul class="checklist">
+              {s.points.map((p) => <li>{p}</li>)}
+            </ul>
+          </div>
+          <div class="feature__panel" aria-hidden="true">
+            <div class="panel">
+              <span class="panel__label">{s.eyebrow}</span>
+              <div class="panel__lines">
+                <span style="width:90%"></span>
+                <span style="width:70%"></span>
+                <span style="width:80%"></span>
+                <span style="width:55%"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    ))
+  }
+
+  <CtaBanner title="See your feedback in one place" subtitle="Free for 14 days. Connect your first source in minutes." />
+</BaseLayout>
+
+<style>
+  .hero-lite {
+    background: radial-gradient(1000px 400px at 50% -20%, var(--ff-brand-soft), transparent 60%);
+  }
+  .feature {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+  .feature--reverse .feature__copy { order: 2; }
+  .feature p { color: var(--ff-ink-soft); }
+  .checklist { list-style: none; padding: 0; margin: 1.25rem 0 0; }
+  .checklist li {
+    position: relative;
+    padding-left: 1.75rem;
+    margin-bottom: 0.6rem;
+    color: var(--ff-ink-soft);
+  }
+  .checklist li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--ff-brand);
+    font-weight: 700;
+  }
+  .panel {
+    background: #fff;
+    border: 1px solid var(--ff-line);
+    border-radius: var(--ff-radius);
+    box-shadow: var(--ff-shadow);
+    padding: 1.5rem;
+    min-height: 220px;
+  }
+  .panel__label {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--ff-brand-dark);
+    background: var(--ff-brand-soft);
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    margin-bottom: 1.25rem;
+  }
+  .panel__lines { display: flex; flex-direction: column; gap: 0.85rem; }
+  .panel__lines span {
+    height: 14px;
+    background: var(--ff-surface-alt);
+    border: 1px solid var(--ff-line);
+    border-radius: 6px;
+    display: block;
+  }
+  @media (max-width: 860px) {
+    .feature { grid-template-columns: 1fr; }
+    .feature--reverse .feature__copy { order: 0; }
+  }
+</style>

@@ -1,0 +1,223 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CtaBanner from '../components/CtaBanner.astro';
+import { APP } from '../config';
+
+const plans = [
+  {
+    name: 'Starter',
+    price: '$0',
+    cadence: 'free forever',
+    blurb: 'For individuals trying FlipFeedback or running a single channel.',
+    cta: 'Start free',
+    href: APP.signup,
+    featured: false,
+    features: [
+      '1 connected source',
+      'Up to 500 feedback items / month',
+      'Basic inbox and triage',
+      '7-day analytics history',
+      '1 team member',
+    ],
+  },
+  {
+    name: 'Team',
+    price: '$49',
+    cadence: 'per month',
+    blurb: 'For marketing teams collecting feedback across several campaigns.',
+    cta: 'Start 14-day trial',
+    href: APP.signup,
+    featured: true,
+    features: [
+      'Up to 10 connected sources',
+      'Up to 25,000 feedback items / month',
+      'Full triage: labels, assignment, comments',
+      '12-month analytics history',
+      'Up to 10 team members',
+      'Saved views and sentiment trends',
+    ],
+  },
+  {
+    name: 'Business',
+    price: '$149',
+    cadence: 'per month',
+    blurb: 'For larger teams that need more volume, history, and control.',
+    cta: 'Start 14-day trial',
+    href: APP.signup,
+    featured: false,
+    features: [
+      'Unlimited connected sources',
+      'Up to 250,000 feedback items / month',
+      'Unlimited analytics history',
+      'Unlimited team members',
+      'Priority support',
+      'Role-based access controls',
+    ],
+  },
+];
+
+const faqs = [
+  {
+    q: 'What counts as a feedback item?',
+    a: 'Any single piece of feedback that lands in your inbox: a survey response, a campaign reply, an app review, a support message. We count items collected per calendar month.',
+  },
+  {
+    q: 'Can I change plans later?',
+    a: 'Yes. Upgrade or downgrade at any time from your account settings. Changes take effect on your next billing cycle.',
+  },
+  {
+    q: 'Do you offer annual billing?',
+    a: 'Yes. Annual plans are billed up front at a 2-month discount. Choose annual at checkout or contact us to switch.',
+  },
+  {
+    q: 'What happens after the trial?',
+    a: 'Your 14-day trial of the Team plan needs no credit card. When it ends you can pick a paid plan or stay on Starter for free.',
+  },
+];
+---
+
+<BaseLayout
+  title="Pricing"
+  description="Simple, transparent pricing for FlipFeedback. Start free, then scale as your feedback volume grows. No credit card required to try."
+>
+  <section class="section hero-lite">
+    <div class="container text-center">
+      <p class="eyebrow">Pricing</p>
+      <h1>Simple pricing that scales with you</h1>
+      <p class="lead mx-auto" style="text-align:center;">
+        Start free, upgrade when your volume grows. Every paid plan includes a 14-day trial,
+        no credit card required.
+      </p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0;">
+    <div class="container">
+      <div class="plans">
+        {
+          plans.map((p) => (
+            <div class={`plan ${p.featured ? 'plan--featured' : ''}`}>
+              {p.featured && <span class="plan__badge">Most popular</span>}
+              <h3>{p.name}</h3>
+              <p class="plan__blurb">{p.blurb}</p>
+              <div class="plan__price">
+                <span class="plan__amount">{p.price}</span>
+                <span class="plan__cadence">{p.cadence}</span>
+              </div>
+              <a href={p.href} class={`btn ${p.featured ? 'btn--primary' : 'btn--ghost'} plan__cta`}>
+                {p.cta}
+              </a>
+              <ul class="checklist">
+                {p.features.map((f) => <li>{f}</li>)}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+      <p class="text-center" style="color:var(--ff-muted);margin-top:1.5rem;">
+        Need more than Business? <a href="/contact">Talk to us about Enterprise.</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <h2 class="text-center" style="margin-bottom:2rem;">Frequently asked questions</h2>
+      <div class="faqs">
+        {
+          faqs.map((f) => (
+            <details class="faq">
+              <summary>{f.q}</summary>
+              <p>{f.a}</p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <CtaBanner />
+</BaseLayout>
+
+<style>
+  .hero-lite {
+    background: radial-gradient(1000px 400px at 50% -20%, var(--ff-brand-soft), transparent 60%);
+  }
+  .plans {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    align-items: start;
+  }
+  .plan {
+    background: #fff;
+    border: 1px solid var(--ff-line);
+    border-radius: var(--ff-radius);
+    padding: 2rem 1.75rem;
+    box-shadow: var(--ff-shadow);
+    position: relative;
+  }
+  .plan--featured {
+    border-color: var(--ff-brand);
+    box-shadow: 0 12px 40px rgba(13, 148, 136, 0.16);
+    transform: translateY(-6px);
+  }
+  .plan__badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--ff-brand);
+    color: #fff;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 0.25rem 0.85rem;
+    border-radius: 999px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .plan__blurb { color: var(--ff-muted); font-size: 0.95rem; min-height: 3em; }
+  .plan__price { margin: 1rem 0 1.25rem; }
+  .plan__amount { font-size: 2.5rem; font-weight: 800; color: var(--ff-ink); letter-spacing: -0.03em; }
+  .plan__cadence { color: var(--ff-muted); margin-left: 0.4rem; }
+  .plan__cta { width: 100%; margin-bottom: 1.5rem; }
+  .checklist { list-style: none; padding: 0; margin: 0; }
+  .checklist li {
+    position: relative;
+    padding-left: 1.75rem;
+    margin-bottom: 0.6rem;
+    color: var(--ff-ink-soft);
+    font-size: 0.95rem;
+  }
+  .checklist li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--ff-brand);
+    font-weight: 700;
+  }
+
+  .faqs { max-width: 720px; margin: 0 auto; }
+  .faq {
+    background: #fff;
+    border: 1px solid var(--ff-line);
+    border-radius: var(--ff-radius-sm);
+    padding: 1rem 1.25rem;
+    margin-bottom: 0.75rem;
+  }
+  .faq summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--ff-ink);
+    list-style: none;
+  }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after { content: '+'; float: right; color: var(--ff-muted); font-weight: 400; }
+  .faq[open] summary::after { content: '−'; }
+  .faq p { margin: 0.75rem 0 0; color: var(--ff-muted); }
+
+  @media (max-width: 860px) {
+    .plans { grid-template-columns: 1fr; }
+    .plan--featured { transform: none; }
+  }
+</style>
