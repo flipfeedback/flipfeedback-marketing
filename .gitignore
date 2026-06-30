@@ -16,3 +16,6 @@ build/
 __pycache__/
 .venv/
 *.pyc
+
+# astro generated
+.astro/
