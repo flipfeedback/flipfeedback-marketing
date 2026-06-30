@@ -1,0 +1,85 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+const fmt = (d: Date) =>
+  d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+---
+
+<BaseLayout
+  title="Blog"
+  description="Notes from the FlipFeedback team on feedback, analytics, and building a focused product."
+>
+  <section class="section hero-lite">
+    <div class="container text-center">
+      <p class="eyebrow">Blog</p>
+      <h1>Notes from the team</h1>
+      <p class="lead mx-auto" style="text-align:center;">
+        Thoughts on feedback, analytics, and building a product we are proud of.
+      </p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:1rem;">
+    <div class="container">
+      <div class="posts">
+        {
+          posts.map((post) => (
+            <a href={`/blog/${post.slug}`} class="post-card card">
+              <div class="post-card__tags">
+                {post.data.tags.map((t) => <span class="post-tag">{t}</span>)}
+              </div>
+              <h2>{post.data.title}</h2>
+              <p>{post.data.description}</p>
+              <div class="post-card__meta">
+                <span>{post.data.author}</span>
+                <span>·</span>
+                <time datetime={post.data.pubDate.toISOString()}>{fmt(post.data.pubDate)}</time>
+              </div>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero-lite {
+    background: radial-gradient(1000px 400px at 50% -20%, var(--ff-brand-soft), transparent 60%);
+  }
+  .posts { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .post-card { display: block; transition: transform 0.15s ease, box-shadow 0.15s ease; }
+  .post-card:hover {
+    text-decoration: none;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(15, 23, 42, 0.1);
+  }
+  .post-card h2 { font-size: 1.4rem; margin: 0.5rem 0 0.5rem; }
+  .post-card p { color: var(--ff-muted); }
+  .post-card__tags { display: flex; gap: 0.5rem; }
+  .post-tag {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--ff-brand-dark);
+    background: var(--ff-brand-soft);
+    padding: 0.15rem 0.55rem;
+    border-radius: 999px;
+  }
+  .post-card__meta {
+    display: flex;
+    gap: 0.5rem;
+    color: var(--ff-muted);
+    font-size: 0.88rem;
+    margin-top: 1rem;
+  }
+  @media (max-width: 860px) {
+    .posts { grid-template-columns: 1fr; }
+  }
+</style>
